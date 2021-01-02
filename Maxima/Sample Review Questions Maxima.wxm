@@ -1,0 +1,342 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 0.8.4 ] */
+
+/* [wxMaxima: comment start ]
+SAMPLE REVIEW QUESTIONS
+
+Q1
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+P(t) := 500*(1+(4*t/(50+t^2)));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(P(t),t);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+subst(t=2,%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+float(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Q2
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Q(t) := exp(-0.000121*t);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(Q(t),t);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+subst(t=0,%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d(diff(Q(t),t),[t,0,10000]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+We solve (c) by first finding out what the original rate
+is, and then setting half that value equal to the derivative.
+We'll solve numerically ("find_root"), since the analytic
+solution gets really ugly.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+subst(t=0,diff(Q(t),t));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d(diff(Q(t),t)-0.5*%,[t,0,10000]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+find_root(diff(Q(t),t)-0.5*(-1.21*10^-4),t,5000,6000);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Q3
+
+Note that "log" means natural log. There is no base 10 log
+function. Use "log(x)/log(10)" instead.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+F(x) := exp(x/2)-log(x^2+1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d(F(x),[x,-3,3]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+To find maxima and minima we must set the derivative to zero.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(diff(F(x),x)=0,x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Since direct solution didn't work, we'll need to turn to 
+approximate solutions. We can see from the graph there are
+extrema between x=0 and 1, and x=1 and 2.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+find_root(diff(F(x),x)=0,x,0,1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+find_root(diff(F(x),x)=0,x,1,2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+There are inflection points around x=-1 and x=1. We'll go
+straight to the numerical solution.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+find_root(diff(F(x),x,2)=0,x,-1.5,-0.5);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+find_root(diff(F(x),x,2)=0,x,0.5,1.5);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Q4
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Cost(x) := 2*x+300000/x;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d(Cost(x),[x,1,400]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d(diff(Cost(x),x),[x,50,400]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Since the derivative is always negative, the function
+decreases throughout. This implies that the minimum cost is
+at the rightmost end of the domain, x=400.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Cost(400);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Q5
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+v(r) := a*(R-r)*r^2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(v(r),r);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(%=0,r);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Clearly the 2R/3 value maximizes the speed. The r=0 value
+minimizes it!
+
+Q6
+
+Since we're filling up the slanted part of the pool, we
+need a volume just for that part. I'll leave you to figure
+out why the formula below is correct.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Volume(h):=h*20*h*10/2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Volume(0.5);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Part (a): current volume/total volume
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+%/((20*10*2)+(20*10*1*0.5));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Part (b): dh/dt=(dh/dV)*(dV/dt)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+1/diff(Volume(h),h)*1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+subst(h=0.5,%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Q7
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(1/cos(x)^2,x,0,%pi/4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Q8
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate((x+7)*(3-2*x)^(1/3),x,0,%pi/4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+float(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Q9
+
+Here we find the area under the top half of the ellipse,
+and double the result.
+
+Notice that Maxima needs to ask for further information to
+produce a result. Here the question is answered by typing
+P for positive, or N for negative.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+2*integrate(b*sqrt(1-(x^2/a^2)),x,-a,a);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Q10
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(1/(x*(log(x)^2)),x,3,inf);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Q11
+
+Here we need a volume of a surface of revolution around 
+the y-axis. It's an improper integral because the base 
+spreads infinitely out in all directions. Let's see how
+Maxima does.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Nor(x) := exp(-x^2/2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d(Nor(x),[x,-3,3]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Each horizontal slice will have x as its width, and delta-y
+as its height. So we need to invert the function to get x
+as a function of y, and then integrate from y = 0 to 1.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(y=Nor(x),x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Notice that if Maxima gives two responses to an answer, there
+is a way to pick one of them out and work with it.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+%[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+x is the radius of the slice. We need to integrate pi r^2 h.
+But the h becomes the dy in the integral.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(%pi*(%^2),y,0,1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Q12
+
+The differential equation for this relation is dw/dt=k*w,
+where w is the amount of the drug and t is hours. We also
+know that w(0)=1, and w(37)=0.5.
+
+The Maxima command to solve a differential equation is ode2.
+First enter the differential equation by putting a single
+quote in front of it. That tells Maxima not to evaluate the
+expression just yet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+'diff(w,t)=k*w;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ode2(%,w,t);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+We know that %c is equal to 1.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+subst(%c=1,%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Now we must find k...substitute the other initial condition.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(exp(k*37)=0.5,k);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Well, that was unpleasant. If we look carefully at the output,
+we can see that all but the last value are complex numbers by
+the appearance of %i in their expressions. Let's get a
+floating point equivalent.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+float(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+So the value of k we're looking for is -0.018733, and
+we're done...except for part (b) of the question.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+exp(-0.018733707582701*48);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

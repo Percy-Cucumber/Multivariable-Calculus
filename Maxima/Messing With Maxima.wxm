@@ -1,0 +1,304 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 16.04.0 ] */
+
+/* [wxMaxima: comment start ]
+This file is a basic introduction to Maxima, to get you started using it in this multivariable calculus course.
+
+Most commands will also be explained in class. Don't forget to check the Help menu, or the Maxima web site for more documentation.
+
+This box is a "text box", which allows you to enter comments. Ctrl-1 to get a text box. For an actual "input box", go to Cell/Insert Input Cell.
+
+BASIC CALCULATOR FUNCTIONS
+
+To get Maxima to perform a calculation, simply enter it into an input box and hit Shift-Enter. Commands should be completed with a semi-colon, but Maxima usually adds it to your command if you forget.
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+37*24;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Notice that Maxima refers to your command as %i1, the first input. The output is %o1. This is helpful, because you can then refer to previous results as you work.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+%o1/4;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Maxima, like other computer algebra systems, gives you an exact expression for your output (if possible) rather than a calculated approximation.
+
+(Notice that pi must be referred to as %pi.)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+sin(%pi/4)*exp(-1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Sometimes you'll want a decimal value for some expression.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+float(%o3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+You can get many more digits of accuracy if you really want them. Here the first command sets the precision to 200 decimal places, and the second evaluates pi to that many places. Notice the "bfloat" rather than just "float".
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fpprec : 5000;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+bfloat(%pi);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+PLOTTING CURVES IN MAXIMA
+
+You are free to continue plotting curves on your graphing calculator or in Geogebra, but you will find that Maxima has more power...so it's good to know how it works here. The plot command, illustrated below, requires you to input the domain of your function, but it works out the range for itself.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d(sin(x)*cos(3*x),[x,0,2*%pi]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+The plot comes up in its own window. On the PC, you can customize the plot or copy it to the clipboard (to import it into Word or some other program) by left-clicking the icon at the top left corner of the window.
+
+Optionally, you can set the range of y values as well. This is very handy if the function has a vertical asymptote, which would otherwise cause scaling problems in your graph.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d(1/x,[x,-3,3],[y,-3,3]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+ALGEBRAIC FUNCTIONS
+
+Very little of what you've seen so far will be new to you. That's about to change. The great advantage of a CAS is its ability to do algebraic drudge work: expanding, factoring, simplifying, etc.  Let's try an example.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+(x+3*y)^5;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Suppose we need this in another form; for instance, we might want to expand it out. Trust me, you don't want to do it by hand.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+expand(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(Note, by the way, that you can refer to the previous output using just a %.) For fun, let's cube this result.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+expand(%^9);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Maxima can also simplify expressions. Let's see if it's able to factor the above mess.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+factor(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+There are many particular commands for manipulating algebraic expressions. Usually Maxima attempts to simplify as you work. If you want to force it to do something specific, see the "Simplification" section of the built-in help system.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+sin(x)^2/cos(x)^3+cos(x)*sin(%pi/3)-exp(3*x)/exp(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+You can also substitute numbers or algebraic expressions into variables within an expression. We'll illustrate two examples here.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+subst(x=0,%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+subst(x=3+y^2,%o13);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Perhaps the most powerful command you'll use early in your experience of Maxima is "solve". The algorithm you're invoking with this command is extremely powerful, and will often work where you would fail. Here's an easy example.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(5*x^2+4*x=17,x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Often the solution can get ugly, so the "float" function works well with it. 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+float(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(x^4/3+4*x^2=3,x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+float(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Sometimes Maxima will produce something that you do not understand (in the above expression, %i stands for i = sqrt(-1)), or even give up completely. As you can see, what it's done below is not very helpful.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(sin(3*x)+4*x^2=3,x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+In the case where neither you nor Maxima can solve the expression using algebra, you might need to turn to numerical methods. First let's plot this function (bringing everything to the left side of the equation first):
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d(sin(3*x)+4*x^2-3,[x,-3,3]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+There are two solutions: one just to the right of x=-1, and one just to the left of 1. Here we tell Maxima to find each root.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+find_root(sin(3*x)+4*x^2-3,x,-1,0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+find_root(sin(3*x)+4*x^2-3,x,0,1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+You'll often need to define functions and work with them. There are several ways of doing this. The easiest is illustrated below.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x) := x^2+sin(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Now we can work with this function in a variety of ways...
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+f(a+b);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d(f(x),[x,-%pi,%pi]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+find_root(f(x),x,-1,-0.5);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+DOING CALCULUS IN MAXIMA
+
+We have just seen Maxima's basic capabilities. But we have not even begun to scratch the surface of what it can do in many areas of math, including calculus. Let's start by finding some derivatives.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(x^6,x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(f(x),x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+You can find second, third, and higher order derivatives just as easily.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(f(x),x,2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(f(x),x,1000);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+The advantage of doing this with Maxima, rather than by hand, is that it is much more reliable than we are, and can handle much more complicated expressions.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+diff((cos(3+exp(4+x^2)))/sin(2*x),x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(%,x,4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Maxima does integration also. The integrate command is capable of all the integration techniques you learned in Calc II, several hundred more, and failing that, accesses a large integral table. Here are a few examples.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(5*x^3+3*x+9,x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(cos(3+7*x),x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(exp(-x)*sin(3*x),x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(exp(-x)*sin(3*x)*x^2,x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Some functions can't be integrated. In these cases, Maxima will just give up.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate((3*x+4)/(2*sin(x)^6-5*x^4+6*x^2+7),x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+If you need a definite integral, you can insert bounds into the integrate command. Here's an example.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(cos(x)*sin(3*x),x,0,3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+float (%o53);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+That's all for now! The best way to get familiar with Maxima, and review Calc II at the same time, is to play with it by solving problems from Calc II. There's an assignment on Moodle. It might take some getting used to, but soon you'll never want to go back to doing calculus the old-fashioned way. Be warned: sometimes I will ask you to do things with pen and paper, so don't get too comfortable with Maxima!
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d([parametric,(5*t),(30-4.9*t**2),[t,0,3]]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d([parametric,(5*t-t**3),(30-4.9*t**2),[t,0,3]]);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
